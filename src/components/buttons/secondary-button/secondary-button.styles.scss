@@ -1,0 +1,22 @@
+.secondary-button {
+  position: relative;
+  font-size: 1.8rem;
+  font-weight: 400;
+  padding: 2rem 4rem;
+  background: transparent;
+  color: #f1f5f9;
+  border: none;
+  border-radius: 5px;
+  background: transparent;
+  cursor: pointer;
+  text-decoration: none;
+
+  &:hover,
+  &:active {
+    color: #9d84ff;
+  }
+
+  i {
+    font-size: 3rem;
+  }
+}
