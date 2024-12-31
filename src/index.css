@@ -1,12 +1,27 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Hide scrollbar for Chrome, Safari and Opera */
+::-webkit-scrollbar {
+  display: none;
+}
+
+/* Hide scrollbar for IE, Edge and Firefox */
+* {
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}
+
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, "Familjen Grotesk", "Segoe UI",
-    "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans",
-    "Helvetica Neue", sans-serif;
+  font-family: "Bitter", "Familjen Grotesk", "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+    sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   background: #050a18;
-  overflow: hidden;
+  color: #cbd5e1;
 }
 
 html {
@@ -27,7 +42,7 @@ code {
     monospace;
 }
 
-#root {
+body #root {
   position: absolute;
   top: 0;
   left: 0;
@@ -36,7 +51,7 @@ code {
   overflow-y: scroll;
 }
 
-canvas.webgl {
+.webgl {
   display: block;
   mix-blend-mode: exclusion;
 }
