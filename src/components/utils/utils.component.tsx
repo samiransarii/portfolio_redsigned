@@ -24,6 +24,18 @@ export const EventLogo = ({ logo }) => (
 );
 
 /**
+ * Non draggable image used in the homepage
+ */
+export const NonDraggableImage = ({ src, alt, classNames }) => (
+  <img
+    src={src}
+    alt={alt}
+    className={`select-none ${classNames}`}
+    onDragStart={(e) => e.preventDefault()}
+  />
+);
+
+/**
  * Google SVG logos used on the TimeLineEvents
  */
 export const GoogleLogo = ({ height, width }) => (

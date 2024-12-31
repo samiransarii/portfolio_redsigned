@@ -1,0 +1,45 @@
+.avatar-section {
+  position: absolute;
+  left: 40%;
+  &__pattern {
+    height: 650px;
+    width: auto;
+
+    &-lines {
+      height: 33rem;
+      width: auto;
+      opacity: 0.5;
+    }
+
+    &-avatar {
+      border: 0.5rem solid #5c3d99;
+      border-radius: 50%;
+      height: 50rem;
+      width: auto;
+      position: absolute;
+      right: -6%;
+      top: -13%;
+      z-index: 100;
+    }
+  }
+
+  &__arrow {
+    height: 30rem;
+    width: auto;
+
+    position: absolute;
+    right: 25%;
+    top: 35%;
+    animation: bounce 0.9s 6;
+  }
+}
+
+@keyframes bounce {
+  0%,
+  100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(60px);
+  }
+}

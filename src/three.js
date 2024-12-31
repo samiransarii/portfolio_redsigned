@@ -1,201 +1,157 @@
+// Import statements
 import * as THREE from "three";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls.js";
 import * as dat from "dat.gui";
 
-// Loading
-const textureLoader = new THREE.TextureLoader();
-const normalTexture = textureLoader.load(
-  "src/static/textures/languageTexture.png"
-);
+class Scene3D {
+  constructor() {
+    this.init();
+    this.setupLights();
+    this.setupGeometry();
+    this.setupEventListeners();
+    this.animate();
+  }
 
-// Debug
-// const gui = new dat.GUI();
+  init() {
+    // Initialize basic properties
+    this.mouseX = 0;
+    this.mouseY = 0;
+    this.targetX = 0;
+    this.targetY = 0;
+    this.windowX = window.innerWidth;
+    this.windowY = window.innerHeight;
 
-// Canvas
-const canvas = document.querySelector("canvas.webgl");
+    // Setup scene
+    this.canvas = document.querySelector("canvas.webgl");
+    this.scene = new THREE.Scene();
+    this.clock = new THREE.Clock();
 
-// Scene
-const scene = new THREE.Scene();
+    // Setup camera
+    this.setupCamera();
 
-// Objects
-const geometry = new THREE.SphereGeometry(0.65, 64, 64);
+    // Setup renderer
+    this.setupRenderer();
 
-// Materials
-const material = new THREE.MeshStandardMaterial();
-material.roughness = 0.2;
-material.metalness = 0.9;
-material.normalMap = normalTexture;
-material.color = new THREE.Color(0x0c4a6e);
+    // Setup debug if needed
+    // this.gui = new dat.GUI();
+  }
 
-// Mesh
-const sphere = new THREE.Mesh(geometry, material);
-scene.add(sphere);
+  setupCamera() {
+    this.camera = new THREE.PerspectiveCamera(
+      75,
+      this.windowX / this.windowY,
+      0.1,
+      100
+    );
+    this.camera.position.set(0, 0, 2);
+    this.scene.add(this.camera);
 
-// Lights
-const pointLight = new THREE.PointLight(0xef00ff, 0.009);
-pointLight.position.x = 2;
-pointLight.position.y = 3;
-pointLight.position.z = 4;
-scene.add(pointLight);
+    // Uncomment to enable orbit controls
+    // this.controls = new OrbitControls(this.camera, this.canvas);
+    // this.controls.enableDamping = true;
+  }
 
-// Light 2
-const pointLight2 = new THREE.PointLight(0x991b1b, 0.1);
-pointLight2.position.set(-3, 3, -3);
-pointLight2.intensity = 4.35;
-scene.add(pointLight2);
+  setupRenderer() {
+    this.renderer = new THREE.WebGLRenderer({
+      canvas: this.canvas,
+      alpha: true,
+    });
+    this.renderer.setSize(this.windowX, this.windowY);
+    this.renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+  }
 
-// const light1 = gui.addFolder("Light 1");
+  setupLights() {
+    // Main purple light
+    this.pointLight = new THREE.PointLight(0xef00ff, 0.009);
+    this.pointLight.position.set(2, 3, 4);
+    this.scene.add(this.pointLight);
 
-// light1.add(pointLight2.position, "x").min(-3).max(3).step(0.01);
-// light1.add(pointLight2.position, "y").min(-3).max(3).step(0.01);
-// light1.add(pointLight2.position, "z").min(-3).max(3).step(0.01);
-// light1.add(pointLight2, "intensity").min(0).max(10).step(0.01);
+    // Coral accent light
+    this.pointLight2 = new THREE.PointLight(0xff7f50, 4.35);
+    this.pointLight2.position.set(-2, 3, -3);
+    this.scene.add(this.pointLight2);
 
-// const pointLightHelper2 = new THREE.PointLightHelper(pointLight2, 1);
-// scene.add(pointLightHelper2);
+    // Blue accent light
+    this.pointLight3 = new THREE.PointLight(0x96ff, 9.31);
+    this.pointLight3.position.set(3, -1.39, -3);
+    this.scene.add(this.pointLight3);
+  }
 
-// Light 3
-const pointLight3 = new THREE.PointLight(0x96ff, 0.1);
-pointLight3.position.set(3, -1.39, -3);
-pointLight3.intensity = 9.31;
-scene.add(pointLight3);
+  setupGeometry() {
+    // Load textures
+    const textureLoader = new THREE.TextureLoader();
+    const normalTexture = textureLoader.load(
+      "src/static/textures/languageTexture.png"
+    );
 
-// const light2 = gui.addFolder("Light 2");
+    // Create sphere
+    const geometry = new THREE.SphereGeometry(0.65, 64, 64);
+    const material = new THREE.MeshStandardMaterial({
+      roughness: 0.2,
+      metalness: 0.9,
+      normalMap: normalTexture,
+      color: new THREE.Color(0x0c4a6e),
+    });
 
-// light2.add(pointLight3.position, "x").min(-3).max(3).step(0.01);
-// light2.add(pointLight3.position, "y").min(-3).max(3).step(0.01);
-// light2.add(pointLight3.position, "z").min(-3).max(3).step(0.01);
-// light2.add(pointLight3, "intensity").min(0).max(10).step(0.01);
+    this.sphere = new THREE.Mesh(geometry, material);
+    this.scene.add(this.sphere);
+  }
 
-// const light2Color = {
-//   color: 0xff0000,
-// };
+  setupEventListeners() {
+    // Resize handler
+    window.addEventListener("resize", () => this.onResize());
 
-// light2.addColor(light2Color, "color").onChange(() => {
-//   pointLight3.color.set(light2Color.color);
-// });
+    // Mouse movement
+    document.addEventListener("mousemove", (event) => this.onMouseMove(event));
 
-// const pointLightHelper3 = new THREE.PointLightHelper(pointLight3, 1);
-// scene.add(pointLightHelper3);
+    // Scroll
+    window.addEventListener("scroll", () => this.onScroll());
+  }
 
-// Light 4
-// const light4 = gui.addFolder("Light 4");
-// const pointLight4 = new THREE.PointLight(0x96ff, 0.1);
-// pointLight4.position.set(200, 200, 2);
-// pointLight4.intensity = 1;
-// scene.add(pointLight4);
+  onResize() {
+    // Update sizes
+    this.windowX = window.innerWidth;
+    this.windowY = window.innerHeight;
 
-// const pointLightHelper4 = new THREE.PointLightHelper(pointLight4, 1);
-// scene.add(pointLightHelper4);
+    // Update camera
+    this.camera.aspect = this.windowX / this.windowY;
+    this.camera.updateProjectionMatrix();
 
-// light4.add(pointLight4.position, "x").min(-30).max(30).step(0.01);
-// light4.add(pointLight4.position, "y").min(-30).max(30).step(0.01);
-// light4.add(pointLight4.position, "z").min(-30).max(30).step(0.01);
-// light4.add(pointLight4, "intensity").min(0).max(10).step(0.01);
+    // Update renderer
+    this.renderer.setSize(this.windowX, this.windowY);
+    this.renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+  }
 
-// const light4Color = {
-//   color: 0xff0000,
-// };
+  onMouseMove(event) {
+    // Calculate mouse position as percentage of window size
+    // This will give us values between -0.5 and 0.5
+    this.mouseX = (event.clientX - this.windowX / 2) / this.windowX;
+    this.mouseY = (event.clientY - this.windowY / 2) / this.windowY;
+  }
 
-// light4.addColor(light4Color, "color").onChange(() => {
-//   pointLight4.color.set(light4Color.color);
-// });
+  onScroll() {
+    this.sphere.position.y = window.scrollY * 0.001;
+  }
 
-/**
- * Sizes
- */
-const sizes = {
-  width: window.innerWidth,
-  height: window.innerHeight,
-};
+  animate() {
+    // Adjust the multiplier to control sensitivity
+    this.targetX = this.mouseX * 2;
+    this.targetY = this.mouseY * 2;
+    const elapsedTime = this.clock.getElapsedTime();
 
-/**
- * Renderer
- */
-const renderer = new THREE.WebGLRenderer({
-  canvas: canvas,
-  alpha: true,
-});
-renderer.setSize(sizes.width, sizes.height);
-renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+    // Update sphere
+    this.sphere.rotation.y = 0.5 * elapsedTime;
+    this.sphere.rotation.y += 0.5 * (this.targetX - this.sphere.rotation.y);
+    this.sphere.rotation.x += 0.05 * (this.targetY - this.sphere.rotation.x);
+    this.sphere.position.z += -0.05 * (this.targetY - this.sphere.rotation.x);
 
-window.addEventListener("resize", () => {
-  // Update sizes
-  sizes.width = window.innerWidth;
-  sizes.height = window.innerHeight;
+    // Render
+    this.renderer.render(this.scene, this.camera);
 
-  // Update camera
-  camera.aspect = sizes.width / sizes.height;
-  camera.updateProjectionMatrix();
-
-  // Update renderer
-  renderer.setSize(sizes.width, sizes.height);
-  renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-});
-
-/**
- * Camera
- */
-// Base camera
-const camera = new THREE.PerspectiveCamera(
-  75,
-  sizes.width / sizes.height,
-  0.1,
-  100
-);
-camera.position.x = 0;
-camera.position.y = 0;
-camera.position.z = 2;
-scene.add(camera);
-
-// Controls
-// const controls = new OrbitControls(camera, canvas)
-// controls.enableDamping = true
-
-/**
- * Animate
- */
-
-document.addEventListener("mousemove", onDocumentMouseMove);
-window.addEventListener("scroll", updateSphere);
-
-let mouseX = 0;
-let mouseY = 0;
-let targetX = 0;
-let targetY = 0;
-const windowX = window.innerWidth;
-const windowY = window.innerHeight;
-
-function onDocumentMouseMove(event) {
-  mouseX = event.clientX - windowX;
-  mouseY = event.clientY - windowY;
+    // Continue animation loop
+    requestAnimationFrame(() => this.animate());
+  }
 }
 
-function updateSphere(event) {
-  sphere.position.y = window.scrollY * 0.001;
-}
-
-const clock = new THREE.Clock();
-
-const tick = () => {
-  targetX = mouseX * 0.001;
-  targetY = mouseY * 0.001;
-  const elapsedTime = clock.getElapsedTime();
-
-  // Update objects
-  sphere.rotation.y = 0.5 * elapsedTime;
-  sphere.rotation.y += 0.5 * (targetX - sphere.rotation.y);
-  sphere.rotation.x += 0.05 * (targetY - sphere.rotation.x);
-  sphere.position.z += -0.05 * (targetY - sphere.rotation.x);
-
-  // Update Orbital Controls
-  // controls.update()
-
-  // Render
-  renderer.render(scene, camera);
-
-  // Call tick again on the next frame
-  window.requestAnimationFrame(tick);
-};
-
-tick();
+// Initialize the scene
+const scene = new Scene3D();
