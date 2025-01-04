@@ -1,11 +1,16 @@
 .navbar-container {
-  height: 15vh;
+  height: 10vh;
   font-family: "Bitter", cursive;
   color: #cbd5e1;
   display: flex;
   align-items: center;
   justify-content: space-between;
   padding: 0 5%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
 
   .logo-container {
     text-decoration: none;
@@ -32,22 +37,28 @@
 
     .link {
       color: #c670ff;
-      border: 0.3rem solid transparent;
+      border: 0.25rem solid transparent;
       border-radius: 0.2rem;
       text-decoration: none;
-      font-size: 2.4rem;
+      font-size: 2.2rem;
       font-weight: 400;
       height: 35%;
       display: grid;
       align-content: center;
-      padding: 0rem 1.2rem;
+      padding: 0rem 1rem;
       transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 
       &:hover {
-        border-bottom: 0.3rem solid #c670ff;
+        border-bottom: 0.25rem solid #c670ff;
         color: #c670ff;
         font-weight: 600;
       }
     }
   }
+}
+
+// Add a spacer to prevent content from hiding behind the fixed navbar
+.navbar-spacer {
+  height: 10vh; // Same height as navbar
+  width: 100%;
 }

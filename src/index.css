@@ -22,6 +22,7 @@ body {
   -moz-osx-font-smoothing: grayscale;
   background: #050a18;
   color: #cbd5e1;
+  letter-spacing: 0.3px;
 }
 
 html {
@@ -54,4 +55,10 @@ body #root {
 .webgl {
   display: block;
   mix-blend-mode: exclusion;
+}
+
+@layer base {
+  :root {
+    --radius: 0.5rem;
+  }
 }
