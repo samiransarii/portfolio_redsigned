@@ -2,6 +2,8 @@
   position: relative;
   height: fit-content;
   z-index: 100;
+  padding: 2rem; // Add some padding so it doesn't stick to edges on mobile
+
   &__greeting {
     position: relative;
     font-size: 7rem;
@@ -11,6 +13,20 @@
     background: linear-gradient(to right, #12c2e9, #5c3d99, #c670ff);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
+    margin-bottom: 2rem;
+
+    // Tablet and below
+    @media screen and (max-width: 768px) {
+      font-size: 4rem;
+      letter-spacing: 0.15rem;
+    }
+
+    // Mobile and below
+    @media screen and (max-width: 480px) {
+      font-size: 3rem;
+      letter-spacing: 0.1rem;
+      margin-bottom: 1.5rem;
+    }
   }
 
   &__about {
@@ -18,11 +34,20 @@
     color: #cbd5e1;
     text-align: left;
     letter-spacing: 0.15rem;
-    padding-top: 1.5rem;
     line-height: 1.3;
 
     p {
       margin-bottom: 0.3rem;
+    }
+
+    // Tablet and below
+    @media screen and (max-width: 768px) {
+      font-size: 2.2rem;
+    }
+
+    // Mobile and below
+    @media screen and (max-width: 480px) {
+      font-size: 1.8rem;
     }
   }
 }

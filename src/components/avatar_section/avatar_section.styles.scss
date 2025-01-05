@@ -1,6 +1,7 @@
 .avatar-section {
   position: absolute;
   left: 40%;
+
   &__pattern {
     height: 650px;
     width: auto;
@@ -26,7 +27,6 @@
   &__arrow {
     height: 30rem;
     width: auto;
-
     position: absolute;
     right: 25%;
     top: 35%;
@@ -41,5 +41,44 @@
   }
   50% {
     transform: translateY(60px);
+  }
+}
+
+/* --------------------------------------
+   MEDIA QUERIES FOR RESPONSIVE SIZING
+   -------------------------------------- */
+@media screen and (max-width: 768px) {
+  .avatar-section__pattern {
+    height: 500px;
+
+    &-lines {
+      height: 25rem;
+    }
+
+    &-avatar {
+      height: 40rem;
+    }
+  }
+
+  .avatar-section__arrow {
+    height: 20rem;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .avatar-section__pattern {
+    height: 350px;
+
+    &-lines {
+      height: 18rem;
+    }
+
+    &-avatar {
+      height: 28rem;
+    }
+  }
+
+  .avatar-section__arrow {
+    height: 14rem;
   }
 }

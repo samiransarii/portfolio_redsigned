@@ -1,22 +1,26 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 
 import "./navbar.styles.scss";
+import { Menu, X } from "lucide-react";
+import { navLinks } from "@/data/footer_data";
 import logo from "../../static/icons/logo.png";
-import { navLinks } from "@/data/footerData";
 
 const Navbar = () => {
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+
   const handleScrollToSection = (e, href) => {
     e.preventDefault();
     const element = document.querySelector(href);
     if (element) {
       element.scrollIntoView({ behavior: "smooth" });
     }
+    setIsMenuOpen(false);
   };
 
   return (
     <>
-      <div className="navbar-container bg-transparent backdrop-blur-3xl border-b border-purple-light/30">
+      <div className="navbar-container border-b bg-transparent border-purple-light/30 backdrop-blur-3xl">
         <Link
           className="logo-container"
           to="#home"
@@ -26,7 +30,16 @@ const Navbar = () => {
             <img src={logo} alt="Logo" />
           </h1>
         </Link>
-        <div className="nav-links">
+
+        <button
+          className="mobile-menu-btn"
+          onClick={() => setIsMenuOpen(!isMenuOpen)}
+          aria-label="Toggle menu"
+        >
+          {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
+        </button>
+
+        <div className={`nav-links ${isMenuOpen ? "mobile-menu-open" : ""}`}>
           {navLinks.map((link) => (
             <Link
               key={link.name}

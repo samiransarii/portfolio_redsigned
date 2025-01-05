@@ -1,5 +1,5 @@
 import React from "react";
-import { experiences } from "../../data/experienceData";
+import { experiences } from "../../data/experience_data";
 import TimelineEvent from "../timeline_event/timeline_event.component";
 import { TimelineLine } from "../utils/utils.component";
 

@@ -1,41 +1,35 @@
 import React from "react";
 import "./profile_section.styles.scss";
-import { SiReaddotcv } from "@icons-pack/react-simple-icons";
 import resumePDF from "../../static/resume.pdf";
+import { profileData } from "@/data/profile_data";
+import ResumeLink from "../resume_link/resume_link.component";
 
-const ProfileSection = () => (
-  <div className="profile-section">
-    <h3 className="profile-section__greeting">
-      Hi, I'm Samir, <br /> a Computer Science Student
-    </h3>
-    <div className="profile-section__about">
-      <p>
-        Software Engineering |
-        <span className="font-semibold"> Engineering solutions by design.</span>
-      </p>
-      <p>
-        I believe every problem has its solution waiting to
-        <span className="font-semibold"> be discovered</span>.
-      </p>
-      <p>
-        Graduating in December 2025!{" "}
-        <span className="font-semibold text-blue"> Seeking FT roles</span>.
-      </p>
-    </div>
-    <div className="pt-8">
-      <a
-        key="resume"
-        href={resumePDF}
-        target="_blank"
-        rel="noopener noreferrer"
-        className="flex flex-row items-center gap-4 text-sm text-white/70 hover:text-purple/70 transition-colors duration-150"
-        aria-label="Resume"
-      >
-        <SiReaddotcv size={38} />
-        <span>Resume</span>
-      </a>
-    </div>
-  </div>
-);
+/**
+ * Renders the profile section containing greeting, role description,
+ * and an animated resume link.
+ *
+ * Displays profile information from profileData configuration including:
+ * - Greeting and role title
+ * - Multi-line description with highlighted text segments
+ * - Resume link with hover animations
+ */
+const ProfileSection = () => {
+  return (
+    <section className="profile-section">
+      <h3 className="profile-section__greeting">
+        {profileData.greeting} <br /> {profileData.role}
+      </h3>
+      <div className="profile-section__about">
+        {profileData.description.map((item, index) => (
+          <p key={index}>
+            {item.text}
+            <span className={item.highlightClass}>{item.highlight}</span>
+          </p>
+        ))}
+      </div>
+      <ResumeLink resumePDF={resumePDF} />
+    </section>
+  );
+};
 
 export default ProfileSection;

@@ -5,10 +5,15 @@ import * as dat from "dat.gui";
 
 class Scene3D {
   constructor() {
+    this.loaded = false;
     this.init();
     this.setupLights();
     this.setupGeometry();
     this.setupEventListeners();
+
+    window.dispatchEvent(new CustomEvent("backgroundAnimationReady"));
+    this.loaded = true;
+
     this.animate();
   }
 

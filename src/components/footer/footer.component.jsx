@@ -1,5 +1,5 @@
 import React from "react";
-import { socialLinks, navLinks } from "../../data/footerData";
+import { socialLinks, navLinks } from "../../data/footer_data";
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
@@ -14,7 +14,7 @@ const Footer = () => {
 
   return (
     <footer className="w-full min-h-16 border-t bg-transparent border-purple-light/30">
-      <div className="min-w-7xl mx-auto px-[15%] py-8 flex flex-col md:flex-row items-center justify-between gap-4">
+      <div className="min-w-7xl mx-auto px-[10%] py-8 flex flex-col md:flex-row items-center justify-between gap-4">
         <div className="flex items-center gap-4">
           {socialLinks.map((social) => (
             <a
@@ -40,7 +40,7 @@ const Footer = () => {
               key={link.name}
               href={link.href}
               onClick={(e) => handleScrollToSection(e, link.href)}
-              className="text-sm text-white/70 hover:text-blue/70 transition-colors duration-200"
+              className="text-xs text-white/70 hover:text-blue/70 transition-colors duration-200"
             >
               {link.name}
             </a>
