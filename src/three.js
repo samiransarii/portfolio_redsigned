@@ -1,5 +1,6 @@
 // Import statements
 import * as THREE from "three";
+import languageTexturePath from "@/static/textures/languageTexture.png";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls.js";
 import * as dat from "dat.gui";
 
@@ -85,9 +86,7 @@ class Scene3D {
   setupGeometry() {
     // Load textures
     const textureLoader = new THREE.TextureLoader();
-    const normalTexture = textureLoader.load(
-      "src/static/textures/languageTexture.png"
-    );
+    const normalTexture = textureLoader.load(languageTexturePath);
 
     // Create sphere
     const geometry = new THREE.SphereGeometry(0.65, 64, 64);

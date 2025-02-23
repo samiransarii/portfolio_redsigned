@@ -7,7 +7,7 @@ export const profileData = {
   role: "a Computer Science Student",
   description: [
     {
-      text: "Software Engineering |",
+      text: "Software Engineer |",
       highlight: " Engineering solutions by design.",
       highlightClass: "font-semibold",
     },
@@ -17,8 +17,8 @@ export const profileData = {
       highlightClass: "font-semibold",
     },
     {
-      text: "Graduating in December 2025! ",
-      highlight: "Seeking FT roles",
+      text: "Graduating in 2026! ",
+      highlight: "Software Engineer by passion! ❤️",
       highlightClass: "font-semibold text-blue",
     },
   ],

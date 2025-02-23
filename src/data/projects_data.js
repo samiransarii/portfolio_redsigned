@@ -21,7 +21,8 @@ export const projectsData = [
       "A minimal, dark blue theme for Sublime Text. Soon it will be available for VS Code, Atom, and more. Available on Package Control, and soon on Visual Studio Marketplace, andAtom Package Manager.",
     technologies: ["Sublime Text", "TypeScript", "Python", "JSON"],
     githubLink: "https://github.com/samiransarii/mooon-light",
-    image: "https://www.samiransari.com/static/media/mooon-light.d99e07fa.png",
+    image:
+      "https://res.cloudinary.com/dxnimrzfu/image/upload/v1736099301/mooonlight_inocar.png",
     liveLink: "https://packagecontrol.io/packages/Mooon%20Light%20Theme",
   },
   {
@@ -31,7 +32,7 @@ export const projectsData = [
     technologies: ["Game Development", "Python", "Pygame"],
     githubLink: "https://github.com/samiransarii/space-invaders",
     image:
-      "https://www.samiransari.com/static/media/space-invaders.5bc0cba5.png",
+      "https://res.cloudinary.com/dxnimrzfu/image/upload/v1736099409/space-invaders_vvt3ml.png",
     liveLink:
       "https://drive.google.com/file/d/1suitY-yIesDCyb0Spzw2ZJhbkUUDgIDt/view?usp=sharing",
   },
@@ -41,7 +42,8 @@ export const projectsData = [
       "A single page music application; simple and minimalistic music player built with REACT, HTML and CSS",
     technologies: ["Music Player", "React", "CSS/SASS"],
     githubLink: "https://github.com/samiransarii/musify",
-    image: "https://www.samiransari.com/static/media/musify.9815c738.png",
+    image:
+      "https://res.cloudinary.com/dxnimrzfu/image/upload/v1736099487/musify_nejxid.png",
     liveLink: "",
   },
   {
